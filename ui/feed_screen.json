@@ -337,7 +337,7 @@
                     }
                   },
                   {
-                    "gamertag_and_date": {
+                    "honbun": {
                       "type": "label",
                       "text": "#content",
                       "color": "$f_color_format",

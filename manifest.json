@@ -1,0 +1,18 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Compact Feed Screen v0.1.0 β",
+    "description": "フィード画面をコンパクトで見やすいUIに変更します。\nまだ実験段階ですのでバグなど起こるかもです。\nCreated by Yuka0745",
+    "version": [ 1, 0, 0 ],
+    "uuid": "29e3ef6b-9981-459c-8086-1bc5429c6fbb",
+    "min_engine_version": [ 1, 13, 0 ]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "description": "",
+      "version": [ 1, 0, 0 ],
+      "uuid": "2f6e0708-92de-4c34-a8f5-275de31fbdb7"
+    }
+  ]
+}

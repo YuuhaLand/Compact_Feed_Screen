@@ -12,3 +12,5 @@ Twitterとかに似たUIになってます
 (このパックを自由に改変してあなたのパックに組み込んでもいいですが、このパックからコピーされたことを明記してください)
 ## 作った人
 @Gotemba912
+## ダウンロード
+[Releases](https://github.com/Gotemba912/Compact_Feed_Screen/releases/)からどうぞ。

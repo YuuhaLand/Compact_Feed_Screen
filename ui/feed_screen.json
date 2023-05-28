@@ -2,16 +2,39 @@
   "namespace": "feed",
 
   "like_image_panel@feed_common.like_image_panel": {
-    "size": [ 12, 12 ],
+    "size": [ 16, 16 ],
     "anchor_from": "center",
     "anchor_to": "center",
     "$is_like_visible": "#feed_likeIcon_visible"
   },
 
-  "color_plus": {
-    "type": "image",
-    "size": [ 18, 18 ],
-    "texture": "textures/ui/color_plus"
+  "new_post_content": {
+    "type": "panel",
+    "size": [ "100%c", 14 ],
+    "offset": [ 0, -3 ],
+    "controls": [
+      {
+        "color_plus": {
+          "type": "image",
+          "size": [ 14, 14 ],
+          "texture": "textures/ui/color_plus",
+          "anchor_from": "left_middle",
+          "anchor_to": "left_middle",
+          "offset": [ -3, 0 ]
+        }
+      },
+      {
+        "newpost_label": {
+          "type": "label",
+          "size": [ "default", 10 ],
+          "text": "feed.newPost",
+          "color": "$text_color",
+          "anchor_from": "right_middle",
+          "anchor_to": "right_middle",
+          "offset": [ -1, 0 ]
+        }
+      }
+    ]
   },
 
   "feed_screen@common.base_screen": {
@@ -65,6 +88,48 @@
     "$screen_bg_content": "feed.chat_background"
   },
 
+  "back_content_panel": {
+    "type": "panel",
+    "size": [ "100%c", "100%" ],
+    "anchor_from": "left_middle",
+    "anchor_to": "left_middle",
+    "controls": [
+      {
+        "back_button@common.back_button": {
+          "offset": [ 0, -1 ],
+          "$button_text_binding_type": "global",
+          "$button_text": "gui.exit"
+        }
+      },
+      {
+        "gamepad_back_helper": {
+          "type": "input_panel",
+          "size": [ "100%c", 26 ],
+          "offset": [ -4, -1 ],
+          "$gamepad_helper_icon_description_text_color": "$light_glyph_default_color",
+          "$gamepad_helper_icon_description_shadow": false,
+
+          "tts_name": "accessibility.button.tts.title",
+          "tts_control_header": "#back_button_accessibility_text",
+
+          "controls": [
+            {
+              "gamepad_helper_button@common.gamepad_helper_b": {
+                "$icon_description_bind": "#back_button_text"
+              }
+            }
+          ],
+          "bindings": [
+            {
+              "binding_name": "#is_using_gamepad",
+              "binding_name_override": "#visible"
+            }
+          ]
+        }
+      }
+    ]
+  },
+
   "chat_header@common_store.store_top_bar": {
     "anchor_to": "top_left",
     "anchor_from": "top_left",
@@ -76,7 +141,7 @@
           "size": [ "100%", 19 ],
           "controls": [
             {
-              "back_button_content_panel@play.back_content_panel": {
+              "back_button_content_panel@feed.back_content_panel": {
                 "offset": [ 2, 0 ]
               }
             },
@@ -102,6 +167,76 @@
                   }
                 ]
               }
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+  "honbun_texts": {
+    "type": "stack_panel",
+    "size": [ "100% - 2px", "100%c + 2px" ],
+    "controls": [
+      {
+        "honbun_text": {
+          "type": "label",
+          "text": "#content",
+          "color": "$f_color_format",
+          "font_type": "unicode",
+          "size": [ "100%", "default" ],
+          "bindings": [
+            {
+              "binding_name": "#content",
+              "binding_type": "collection",
+              "binding_collection_name": "feed_collection"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(not (#content = ''))",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "padding_1": {
+          "type": "panel",
+          "size": [ 0, 2 ],
+          "bindings": [
+            {
+              "binding_name": "#feed_text_visible",
+              "binding_name_override": "#visible",
+              "binding_type": "collection",
+              "binding_collection_name": "feed_collection"
+            }
+          ]
+        }
+      },
+      {
+        "feed_texture": {
+          "type": "image",
+          "size": [ 180, 100 ],
+          "texture": "#feed_texture",
+          "texture_file_system": "#feed_texture_source",
+          "bindings": [
+            {
+              "binding_name": "#feed_texture",
+              "binding_type": "collection",
+              "binding_name_override": "#texture",
+              "binding_collection_name": "feed_collection"
+            },
+            {
+              "binding_name": "#feed_texture_source",
+              "binding_name_override": "#texture_file_system",
+              "binding_type": "collection",
+              "binding_collection_name": "feed_collection"
+            },
+            {
+              "binding_name": "#feed_text_visible",
+              "binding_name_override": "#visible",
+              "binding_type": "collection",
+              "binding_collection_name": "feed_collection"
             }
           ]
         }
@@ -142,6 +277,20 @@
           "size": [ "100%", "default" ],
           "text": "hbui.Achievements.completedEmptyTitle",
           "text_alignment": "center",
+          "bindings": [
+            {
+              "binding_name": "#no_feed_item_visible",
+              "binding_name_override": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "no_items_image": {
+          "type": "image",
+          "size": [ "100%", 50 ],
+          "texture": "gui/dist/hbui/assets/emptyStatesNoProgress-02663.png",
+          "texture_file_system": "InAppPackage",
           "bindings": [
             {
               "binding_name": "#no_feed_item_visible",
@@ -284,6 +433,16 @@
                     "binding_collection_name": "feed_collection",
                     "binding_name_override": "#visible"
                   }
+                ],
+                "controls": [
+                  {
+                    "waku": {
+                      "type": "image",
+                      "size": [ "100%", "100%" ],
+                      "texture": "textures/ui/feed_avatar",
+                      "layer": 2
+                    }
+                  }
                 ]
               }
             },
@@ -300,25 +459,44 @@
                 "controls": [
                   {
                     "gamertag_and_date": {
-                      "type": "label",
-                      "text": "#text",
-                      "color": "$f_color_format",
-                      "size": [ "default", 10 ],
-                      "bindings": [
+                      "type": "stack_panel",
+                      "orientation": "horizontal",
+                      "size": [ "100%", 13 ],
+                      "$is_unviewed_post": "#unviewed_post_badge_visible",
+                      "controls": [
                         {
-                          "binding_name": "#gamertag",
-                          "binding_type": "collection",
-                          "binding_collection_name": "feed_collection"
+                          "gamertag_and_date": {
+                            "type": "label",
+                            "text": "#text",
+                            "color": "$f_color_format",
+                            "size": [ "default", 10 ],
+                            "bindings": [
+                              {
+                                "binding_name": "#gamertag",
+                                "binding_type": "collection",
+                                "binding_collection_name": "feed_collection"
+                              },
+                              {
+                                "binding_name": "#time_since_feed_post",
+                                "binding_type": "collection",
+                                "binding_collection_name": "feed_collection"
+                              },
+                              {
+                                "binding_type": "view",
+                                "source_property_name": "(#gamertag + '  §7' + #time_since_feed_post)",
+                                "target_property_name": "#text"
+                              }
+                            ]
+                          }
                         },
                         {
-                          "binding_name": "#time_since_feed_post",
-                          "binding_type": "collection",
-                          "binding_collection_name": "feed_collection"
+                          "paddding": {
+                            "type": "panel",
+                            "size": [ 3, 0 ]
+                          }
                         },
                         {
-                          "binding_type": "view",
-                          "source_property_name": "(#gamertag + '  §7' + #time_since_feed_post)",
-                          "target_property_name": "#text"
+                          "unviewed_post_badge@feed_common.unviewed_post_badge": {}
                         }
                       ]
                     }
@@ -337,58 +515,52 @@
                     }
                   },
                   {
-                    "honbun": {
-                      "type": "label",
-                      "text": "#content",
-                      "color": "$f_color_format",
-                      "font_type": "unicode",
-                      "size": [ "100%", "default" ],
-                      "bindings": [
+                    "honbun@common.button": {
+                      "size": [ "100%", "100%c" ],
+                      "$pressed_button_name": "button.feed_comment",
+                      "default_control": "default",
+                      "hover_control": "hover",
+                      "pressed_control": "pressed",
+                      "controls": [
                         {
-                          "binding_name": "#content",
-                          "binding_type": "collection",
-                          "binding_collection_name": "feed_collection"
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "padding_1": {
-                      "type": "panel",
-                      "size": [ 0, 2 ],
-                      "bindings": [
-                        {
-                          "binding_name": "#feed_text_visible",
-                          "binding_name_override": "#visible",
-                          "binding_type": "collection",
-                          "binding_collection_name": "feed_collection"
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "feed_texture": {
-                      "type": "image",
-                      "size": [ 180, 100 ],
-                      "texture": "#feed_texture",
-                      "texture_file_system": "#feed_texture_source",
-                      "bindings": [
-                        {
-                          "binding_name": "#feed_texture",
-                          "binding_type": "collection",
-                          "binding_name_override": "#texture",
-                          "binding_collection_name": "feed_collection"
+                          "default": {
+                            "type": "panel",
+                            "size": [ "100%", "100%c" ],
+                            "controls": [
+                              {
+                                "honbun_texts@feed.honbun_texts": {}
+                              }
+                            ]
+                          }
                         },
                         {
-                          "binding_name": "#feed_texture_source",
-                          "binding_name_override": "#texture_file_system",
-                          "binding_type": "collection",
-                          "binding_collection_name": "feed_collection"
+                          "hover": {
+                            "type": "image",
+                            "size": [ "100%", "100%c" ],
+                            "texture": "textures/ui/focus_border_white",
+                            "controls": [
+                              {
+                                "honbun_texts@feed.honbun_texts": {}
+                              }
+                            ]
+                          }
                         },
                         {
-                          "binding_name": "#feed_text_visible",
-                          "binding_name_override": "#visible",
-                          "binding_type": "collection",
+                          "pressed": {
+                            "type": "image",
+                            "size": [ "100%", "100%c" ],
+                            "texture": "textures/ui/focus_border_white",
+                            "controls": [
+                              {
+                                "honbun_texts@feed.honbun_texts": {}
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "bindings": [
+                        {
+                          "binding_type": "collection_details",
                           "binding_collection_name": "feed_collection"
                         }
                       ]
@@ -429,9 +601,12 @@
                       "controls": [
                         {
                           "like_button@common.button": {
-                            "size": [ 14, 14 ],
+                            "size": [ 18, 18 ],
                             "hover_control": "hover_border",
+                            "pressed_control": "pressed_border",
+                            "focus_enabled": true,
                             "$pressed_button_name": "button.feed_like",
+                            "$focus_id": "like_button",
                             "controls": [
                               {
                                 "base@feed.like_image_panel": {
@@ -439,6 +614,13 @@
                               },
                               {
                                 "hover_border": {
+                                  "type": "image",
+                                  "size": [ "100%", "100%" ],
+                                  "texture": "textures/ui/focus_border_white"
+                                }
+                              },
+                              {
+                                "pressed_border": {
                                   "type": "image",
                                   "size": [ "100%", "100%" ],
                                   "texture": "textures/ui/focus_border_white"
@@ -461,19 +643,28 @@
                         },
                         {
                           "comment_button@common.button": {
-                            "size": [ 14, 14 ],
+                            "size": [ 18, 18 ],
                             "hover_control": "hover_border",
+                            "pressed_control": "pressed_border",
+                            "focus_enabled": true,
                             "$pressed_button_name": "button.feed_comment",
                             "controls": [
                               {
                                 "base": {
                                   "type": "image",
                                   "texture": "textures/ui/comment",
-                                  "size": [ 12, 12 ]
+                                  "size": [ 16, 16 ]
                                 }
                               },
                               {
                                 "hover_border": {
+                                  "type": "image",
+                                  "size": [ "100%", "100%" ],
+                                  "texture": "textures/ui/focus_border_white"
+                                }
+                              },
+                              {
+                                "pressed_border": {
                                   "type": "image",
                                   "size": [ "100%", "100%" ],
                                   "texture": "textures/ui/focus_border_white"
@@ -496,19 +687,29 @@
                         },
                         {
                           "more_options_button@common.button": {
-                            "size": [ 14, 14 ],
+                            "size": [ 18, 18 ],
                             "hover_control": "hover_border",
+                            "pressed_control": "pressed_border",
+                            "focus_enabled": true,
+                            "$focus_override_right": "FOCUS_OVERRIDE_STOP",
                             "$pressed_button_name": "button.feed_options",
                             "controls": [
                               {
                                 "base": {
                                   "type": "image",
                                   "texture": "textures/ui/more-dots",
-                                  "size": [ 12, 12 ]
+                                  "size": [ 16, 16 ]
                                 }
                               },
                               {
                                 "hover_border": {
+                                  "type": "image",
+                                  "size": [ "100%", "100%" ],
+                                  "texture": "textures/ui/focus_border_white"
+                                }
+                              },
+                              {
+                                "pressed_border": {
                                   "type": "image",
                                   "size": [ "100%", "100%" ],
                                   "texture": "textures/ui/focus_border_white"
@@ -555,13 +756,17 @@
         }
       },
       {
-        "new_post_button@common_buttons.light_content_button": {
-          "anchor_from": "bottom_right",
-          "anchor_to": "bottom_right",
-          "size": [ 25, 25 ],
-          "offset": [ -25, -25 ],
+        "new_post_button@common_buttons.light_content_form_fitting_button": {
+          "anchor_from": "top_right",
+          "anchor_to": "top_right",
+          "size": [ "100%c", 18 ],
+          "offset": [ -2, 1 ],
+          "$button_state_panel": "common_buttons.new_ui_width_fitting_button_panel",
 
-          "$button_content": "feed.color_plus",
+          "$focus_override_up": "FOCUS_OVERRIDE_STOP",
+          "$focus_override_right": "FOCUS_OVERRIDE_STOP",
+
+          "$button_content": "feed.new_post_content",
           "$pressed_button_name": "button.newpost"
         }
       },
@@ -588,7 +793,7 @@
     "type": "image",
     "size": [ "100%", "100%" ],
     "texture": "textures/ui/White",
-    "color": [ 0.0, 0.0, 0.0 ],
-    "alpha": 0.7
+    "color": [ 0.192, 0.200, 0.220 ],
+    "alpha": 1
   }
 }

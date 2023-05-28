@@ -66,7 +66,7 @@
           "size": [ "100%", 19 ],
           "controls": [
             {
-              "back_button_content_panel@play.back_content_panel": {
+              "back_button_content_panel@feed.back_content_panel": {
                 "offset": [ 2, 0 ]
               }
             },
@@ -146,6 +146,16 @@
                     "binding_collection_name": "comment_collection",
                     "binding_name_override": "#visible"
                   }
+                ],
+                "controls": [
+                  {
+                    "waku": {
+                      "type": "image",
+                      "size": [ "100%", "100%" ],
+                      "texture": "textures/ui/feed_avatar",
+                      "layer": 2
+                    }
+                  }
                 ]
               }
             },
@@ -206,6 +216,11 @@
                       "bindings": [
                         {
                           "binding_name": "#content"
+                        },
+                        {
+                          "binding_type": "view",
+                          "source_property_name": "(not (#content = ''))",
+                          "target_property_name": "#visible"
                         }
                       ]
                     }
@@ -282,8 +297,10 @@
                       "controls": [
                         {
                           "like_button@common.button": {
-                            "size": [ 14, 14 ],
+                            "size": [ 18, 18 ],
                             "hover_control": "hover_border",
+                            "pressed_control": "pressed_border",
+                            "focus_enabled": true,
                             "$pressed_button_name": "button.like_button",
                             "controls": [
                               {
@@ -293,6 +310,13 @@
                               },
                               {
                                 "hover_border": {
+                                  "type": "image",
+                                  "size": [ "100%", "100%" ],
+                                  "texture": "textures/ui/focus_border_white"
+                                }
+                              },
+                              {
+                                "pressed_border": {
                                   "type": "image",
                                   "size": [ "100%", "100%" ],
                                   "texture": "textures/ui/focus_border_white"
@@ -315,19 +339,28 @@
                         },
                         {
                           "more_options_button@common.button": {
-                            "size": [ 14, 14 ],
+                            "size": [ 18, 18 ],
                             "hover_control": "hover_border",
+                            "pressed_control": "pressed_border",
+                            "focus_enabled": true,
                             "$pressed_button_name": "button.comment_options", //パッキャラパッキャラぱおーん
                             "controls": [
                               {
                                 "base": {
                                   "type": "image",
                                   "texture": "textures/ui/more-dots",
-                                  "size": [ 12, 12 ]
+                                  "size": [ 16, 16 ]
                                 }
                               },
                               {
                                 "hover_border": {
+                                  "type": "image",
+                                  "size": [ "100%", "100%" ],
+                                  "texture": "textures/ui/focus_border_white"
+                                }
+                              },
+                              {
+                                "pressed_border": {
                                   "type": "image",
                                   "size": [ "100%", "100%" ],
                                   "texture": "textures/ui/focus_border_white"
@@ -453,6 +486,16 @@
                     "binding_collection_name": "comment_collection",
                     "binding_name_override": "#visible"
                   }
+                ],
+                "controls": [
+                  {
+                    "waku": {
+                      "type": "image",
+                      "size": [ "100%", "100%" ],
+                      "texture": "textures/ui/feed_avatar",
+                      "layer": 2
+                    }
+                  }
                 ]
               }
             },
@@ -536,8 +579,10 @@
                       "controls": [
                         {
                           "like_button@common.button": {
-                            "size": [ 14, 14 ],
+                            "size": [ 18, 18 ],
                             "hover_control": "hover_border",
+                            "pressed_control": "pressed_border",
+                            "focus_enabled": true,
                             "$pressed_button_name": "button.comment_grid_like",
                             "controls": [
                               {
@@ -547,6 +592,13 @@
                               },
                               {
                                 "hover_border": {
+                                  "type": "image",
+                                  "size": [ "100%", "100%" ],
+                                  "texture": "textures/ui/focus_border_white"
+                                }
+                              },
+                              {
+                                "pressed_border": {
                                   "type": "image",
                                   "size": [ "100%", "100%" ],
                                   "texture": "textures/ui/focus_border_white"
@@ -569,19 +621,28 @@
                         },
                         {
                           "more_options_button@common.button": {
-                            "size": [ 14, 14 ],
+                            "size": [ 18, 18 ],
                             "hover_control": "hover_border",
+                            "pressed_control": "pressed_border",
+                            "focus_enabled": true,
                             "$pressed_button_name": "button.comment_feed_options", //パッキャラパッキャラぱおーん
                             "controls": [
                               {
                                 "base": {
                                   "type": "image",
                                   "texture": "textures/ui/more-dots",
-                                  "size": [ 12, 12 ]
+                                  "size": [ 16, 16 ]
                                 }
                               },
                               {
                                 "hover_border": {
+                                  "type": "image",
+                                  "size": [ "100%", "100%" ],
+                                  "texture": "textures/ui/focus_border_white"
+                                }
+                              },
+                              {
+                                "pressed_border": {
                                   "type": "image",
                                   "size": [ "100%", "100%" ],
                                   "texture": "textures/ui/focus_border_white"

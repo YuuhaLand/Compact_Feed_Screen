@@ -1,9 +1,7 @@
 # Compact Feed Screen
 このMCBEリソースパックはRealmのフィードをコンパクトで見やすいUIに変更します。  
 Twitterとかに似たUIになってます  
-まだ実験段階ですのでバグとか起こるかもです。  
-
-今後Gote-Supporterに入れるか否かはまだ検討中
+# ⚠このリソパはRealmsストーリーの実装により使えなくなりました。⚠
 ## スクショ
 ![スクショその１](https://raw.githubusercontent.com/Gotemba912/Compact_Feed_Screen/main/ScreenShots/ss01.png "スクショその１")
 ![スクショその２](https://raw.githubusercontent.com/Gotemba912/Compact_Feed_Screen/main/ScreenShots/ss02.png "スクショその２")
